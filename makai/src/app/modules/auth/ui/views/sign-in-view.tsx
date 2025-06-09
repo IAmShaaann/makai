@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import {
   Form,
   FormControl,
@@ -16,11 +17,13 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OctagonAlertIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+
+import Link from "next/link";
+
+import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -47,11 +50,33 @@ export const SignInView = () => {
       {
         email: data.email,
         password: data.password,
+        callbackURL: "/"
       },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/");
+          router.push("/")
+        },
+        onError: ({ error }) => {
+          setPending(false);
+          setError(error.message);
+        },
+      }
+    );
+  };
+
+  const handleSocialLogin = async (provider: "github" | "google") => {
+    setPending(true);
+    setError(null);
+    await authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL:"/"
+      },
+
+      {
+        onSuccess: () => {
+          setPending(false);
         },
         onError: ({ error }) => {
           setPending(false);
@@ -130,11 +155,23 @@ export const SignInView = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button type="button" variant={"outline"} className="w-full" disabled={pending}>
-                    Google
+                  <Button
+                    type="button"
+                    variant={"outline"}
+                    className="w-full"
+                    disabled={pending}
+                    onClick={() => handleSocialLogin("google")}
+                  >
+                    <FaGoogle/>
                   </Button>
-                  <Button type="button" variant={"outline"} className="w-full" disabled={pending}>
-                    Github
+                  <Button
+                    type="button"
+                    variant={"outline"}
+                    className="w-full"
+                    disabled={pending}
+                    onClick={() => handleSocialLogin("github")}
+                  >
+                    <FaGithub/>
                   </Button>
                 </div>
                 <div className="text-center text-sm">
@@ -150,13 +187,12 @@ export const SignInView = () => {
             </form>
           </Form>
 
-          <div className="bg-radial from-blue-300 to-blue-950 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-gradient-to-bl from-[#90765F] to-[#FFEDDD] relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img
               src={"./logo.svg"}
               alt="makai-logo"
               className="h-[92px] w-[92px]"
             />
-            <p className="text-2xl font-semibold text-[#edf2f4]">Meowww </p>
           </div>
         </CardContent>
       </Card>
