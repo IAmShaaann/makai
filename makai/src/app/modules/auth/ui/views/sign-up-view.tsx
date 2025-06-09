@@ -104,7 +104,7 @@ export const SignUpView = () => {
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form
-              className="p:6 md:p-8"
+              className="p-6 md:p-8"
               onSubmit={form.handleSubmit(handleSubmit)}
             >
               <div className="flex flex-col gap-6">
@@ -125,7 +125,7 @@ export const SignUpView = () => {
                         <FormLabel>Name</FormLabel>
                         <FormControl>
                           <Input
-                            type="test"
+                            type="text"
                             placeholder="John Doe"
                             {...field}
                           />
@@ -199,7 +199,7 @@ export const SignUpView = () => {
                   </Alert>
                 )}
                 <Button type="submit" className="w-full" disabled={pending}>
-                  Sign in
+                  Sign up
                 </Button>
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                   <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -214,7 +214,7 @@ export const SignUpView = () => {
                     disabled={pending}
                     onClick={() => handleSocialLogin("google")}
                   >
-                    <FaGoogle/>
+                    <FaGoogle />
                   </Button>
                   <Button
                     type="button"
