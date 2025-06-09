@@ -92,7 +92,7 @@ export const SignInView = () => {
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form
-              className="p:6 md:p-8"
+              className="p-6 md:p-8"
               onSubmit={form.handleSubmit(handleSubmit)}
             >
               <div className="flex flex-col gap-6">
