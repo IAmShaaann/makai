@@ -239,7 +239,7 @@ export const SignUpView = () => {
             </form>
           </Form>
 
-          <div className="bg-gradient-to-bl from-[#90765F] to-[#FFEDDD] relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-gradient-to-bl from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img
               src={"./logo.svg"}
               alt="makai-logo"
