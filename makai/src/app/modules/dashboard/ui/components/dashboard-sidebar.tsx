@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 import Link from "next/link";
-import { headers } from "next/headers";
 import { usePathname } from "next/navigation";
 import { DashboardUserButton } from "./dashboard-user-button";
 
@@ -51,7 +50,7 @@ const DashboardSidebar = () => {
       <SidebarHeader className="text-sidebar-accent-foreground">
         <Link href="/" className="flex items-center gap-2 px-2 py-2">
           <Image src="logo.svg" alt="makai-logo" height={36} width={36} />
-          <p className="text-2xl font-semibold">Conversa</p>
+          <p className="text-2xl font-semibold">MakaI</p>
         </Link>
       </SidebarHeader>
       <div className="px-4 py-2">
