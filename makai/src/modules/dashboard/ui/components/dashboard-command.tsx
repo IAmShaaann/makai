@@ -18,7 +18,9 @@ export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
     <CommandResponsiveDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Find a meeting or an agent" />
       <CommandList>
-        <CommandItem>Test</CommandItem>
+        <CommandItem>Naruto Uzumaki</CommandItem>
+        <CommandItem>Kakashi Hatake</CommandItem>
+
       </CommandList>
     </CommandResponsiveDialog>
   );
