@@ -1,19 +1,26 @@
 import { db } from "@/db";
 import { agents } from "@/db/schema";
-import {
-  createTRPCRouter, 
-  protectedProcedures,
-} from "@/trpc/init";
-import { agentsCreateSchema } from "../schemas";
+
+import { createTRPCRouter, protectedProcedures } from "@/trpc/init";
+import { eq, getTableColumns, sql } from "drizzle-orm";
 import { z } from "zod";
-import { eq } from "drizzle-orm";
+
+import { agentsCreateSchema } from "../schemas";
+
 
 export const agentsRouter = createTRPCRouter({
-  
-  getOne: protectedProcedures.input(z.object({ id: z.string()})).query(async ({ input}) => {
-    const [exisitingAgent] = await db.select().from(agents).where(eq(agents.id, input.id));
-    return exisitingAgent;
-  }),
+  getOne: protectedProcedures
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const [exisitingAgent] = await db
+        .select({
+          meetingCount: sql`count(*)`,
+          ...getTableColumns(agents)
+        })
+        .from(agents)
+        .where(eq(agents.id, input.id));
+      return exisitingAgent;
+    }),
 
   getMany: protectedProcedures.query(async () => {
     const data = await db.select().from(agents);
@@ -29,5 +36,4 @@ export const agentsRouter = createTRPCRouter({
 
       return agent;
     }),
-    
 });
