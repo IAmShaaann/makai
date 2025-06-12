@@ -38,13 +38,28 @@ export const AgentForm = ({
 
   const createAgent = useMutation(
     trpc.agents.create.mutationOptions({
-      onSuccess:async () => {
+      onSuccess: async () => {
         await querClient.invalidateQueries(
           trpc.agents.getMany.queryOptions({})
         );
-        if(initialValues?.id){
+        onSuccess?.();
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    })
+  );
+
+  const updateAgent = useMutation(
+    trpc.agents.update.mutationOptions({
+      onSuccess: async () => {
+        await querClient.invalidateQueries(
+          trpc.agents.getMany.queryOptions({})
+        );
+
+        if (initialValues?.id) {
           await querClient.invalidateQueries(
-            trpc.agents.getOne.queryOptions({ id: initialValues.id})
+            trpc.agents.getOne.queryOptions({ id: initialValues.id })
           )
         }
         onSuccess?.();
@@ -64,11 +79,14 @@ export const AgentForm = ({
   });
 
   const isEdit = !!initialValues?.id;
-  const isPending = createAgent.isPending;
+  const isPending = createAgent.isPending || updateAgent.isPending;
 
   const onSubmit = (values: z.infer<typeof agentsCreateSchema>) => {
     if (isEdit) {
-      console.log("Handle agent updation.");
+      updateAgent.mutate({
+        ...values,
+        id: initialValues?.id,
+      });
     } else {
       createAgent.mutate(values);
     }
@@ -93,7 +111,7 @@ export const AgentForm = ({
               <FormControl>
                 <Input {...field} placeholder="Naruto Uzumaki" />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -109,7 +127,7 @@ export const AgentForm = ({
                   placeholder="You're a Ninja of the village hidden in the leaf, Provide helpful assistence to become Hokage. "
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
 
             </FormItem>
           )}
