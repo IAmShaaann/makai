@@ -10,7 +10,6 @@ export const MeetingsView = () => {
   return (
     <div>
       <h1>Meetings View</h1>
-      {JSON.stringify(data, null, 2)}
     </div>
   );
 };
