@@ -10,7 +10,7 @@ interface UpdateAgentDialogProps {
 export const UpdateAgentDialog = ({
   open,
   onOpenChange,
-  initialValues
+  initialValues,
 }: UpdateAgentDialogProps) => {
   return (
     <ResponsiveDialog
@@ -19,7 +19,11 @@ export const UpdateAgentDialog = ({
       open={open}
       onOpenChange={onOpenChange}
     >
-      <AgentForm onSuccess={() => onOpenChange(false)} onCancel={() => onOpenChange(false)} initialValues={initialValues}/>
+      <AgentForm
+        onSuccess={() => onOpenChange(false)}
+        onCancel={() => onOpenChange(false)}
+        initialValues={initialValues}
+      />
     </ResponsiveDialog>
   );
 };

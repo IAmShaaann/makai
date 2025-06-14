@@ -63,18 +63,18 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: "/"
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/")
+          router.push("/");
         },
         onError: ({ error }) => {
           setPending(false);
           setError(error.message);
         },
-      }
+      },
     );
   };
 
@@ -84,7 +84,7 @@ export const SignUpView = () => {
     await authClient.signIn.social(
       {
         provider: provider,
-        callbackURL: "/"
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
@@ -94,7 +94,7 @@ export const SignUpView = () => {
           setPending(false);
           setError(error.message);
         },
-      }
+      },
     );
   };
 
@@ -223,7 +223,7 @@ export const SignUpView = () => {
                     disabled={pending}
                     onClick={() => handleSocialLogin("github")}
                   >
-                    <FaGithub/>
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">

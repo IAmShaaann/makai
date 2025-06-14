@@ -50,18 +50,18 @@ export const SignInView = () => {
       {
         email: data.email,
         password: data.password,
-        callbackURL: "/"
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/")
+          router.push("/");
         },
         onError: ({ error }) => {
           setPending(false);
           setError(error.message);
         },
-      }
+      },
     );
   };
 
@@ -71,7 +71,7 @@ export const SignInView = () => {
     await authClient.signIn.social(
       {
         provider: provider,
-        callbackURL:"/"
+        callbackURL: "/",
       },
 
       {
@@ -82,7 +82,7 @@ export const SignInView = () => {
           setPending(false);
           setError(error.message);
         },
-      }
+      },
     );
   };
 
@@ -162,7 +162,7 @@ export const SignInView = () => {
                     disabled={pending}
                     onClick={() => handleSocialLogin("google")}
                   >
-                    <FaGoogle/>
+                    <FaGoogle />
                   </Button>
                   <Button
                     type="button"
@@ -171,7 +171,7 @@ export const SignInView = () => {
                     disabled={pending}
                     onClick={() => handleSocialLogin("github")}
                   >
-                    <FaGithub/>
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">

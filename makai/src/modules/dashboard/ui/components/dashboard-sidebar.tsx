@@ -14,7 +14,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
 
-
 import { cn } from "@/lib/utils";
 
 import Image from "next/image";
@@ -44,7 +43,7 @@ const secondSection = [
 ];
 
 const DashboardSidebar = () => {
-    const pathname = usePathname();
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarHeader className="text-sidebar-accent-foreground">
@@ -62,12 +61,15 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {firstSection.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton className={cn(
-                    "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#e9b189]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
-                    pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10"
-                  )}
-                  isActive={pathname===item.href}>
-                    <item.icon className="size-5"/>
+                  <SidebarMenuButton
+                    className={cn(
+                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#e9b189]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
+                      pathname === item.href &&
+                        "bg-linear-to-r/oklch border-[#5D6B68]/10",
+                    )}
+                    isActive={pathname === item.href}
+                  >
+                    <item.icon className="size-5" />
                     <Link href={item.href}>
                       <span className="text-sm font-medium tracking-tight">
                         {item.label}
@@ -87,12 +89,15 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {secondSection.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton className={cn(
-                    "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#e9b189]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
-                    pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10"
-                  )}
-                  isActive={pathname===item.href}>
-                    <item.icon className="size-5"/>
+                  <SidebarMenuButton
+                    className={cn(
+                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#e9b189]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
+                      pathname === item.href &&
+                        "bg-linear-to-r/oklch border-[#5D6B68]/10",
+                    )}
+                    isActive={pathname === item.href}
+                  >
+                    <item.icon className="size-5" />
                     <Link href={item.href}>
                       <span className="text-sm font-medium tracking-tight">
                         {item.label}
@@ -106,7 +111,7 @@ const DashboardSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="text-white">
-        <DashboardUserButton/>
+        <DashboardUserButton />
       </SidebarFooter>
     </Sidebar>
   );

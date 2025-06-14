@@ -7,4 +7,4 @@ export const agentsCreateSchema = z.object({
 
 export const agentsUpdateSchema = agentsCreateSchema.extend({
   id: z.string().min(1, { message: "The ID is invalid." }),
-})
+});

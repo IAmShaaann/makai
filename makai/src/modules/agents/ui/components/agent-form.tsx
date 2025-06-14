@@ -40,34 +40,34 @@ export const AgentForm = ({
     trpc.agents.create.mutationOptions({
       onSuccess: async () => {
         await querClient.invalidateQueries(
-          trpc.agents.getMany.queryOptions({})
+          trpc.agents.getMany.queryOptions({}),
         );
         onSuccess?.();
       },
       onError: (error) => {
-        toast.error(error.message)
+        toast.error(error.message);
       },
-    })
+    }),
   );
 
   const updateAgent = useMutation(
     trpc.agents.update.mutationOptions({
       onSuccess: async () => {
         await querClient.invalidateQueries(
-          trpc.agents.getMany.queryOptions({})
+          trpc.agents.getMany.queryOptions({}),
         );
 
         if (initialValues?.id) {
           await querClient.invalidateQueries(
-            trpc.agents.getOne.queryOptions({ id: initialValues.id })
-          )
+            trpc.agents.getOne.queryOptions({ id: initialValues.id }),
+          );
         }
         onSuccess?.();
       },
       onError: (error) => {
-        toast.error(error.message)
+        toast.error(error.message);
       },
-    })
+    }),
   );
 
   const form = useForm<z.infer<typeof agentsCreateSchema>>({
@@ -128,7 +128,6 @@ export const AgentForm = ({
                 />
               </FormControl>
               <FormMessage />
-
             </FormItem>
           )}
         />

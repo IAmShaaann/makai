@@ -16,19 +16,23 @@ export const AgentsListHeader = () => {
   const areFiltersModified = !!filters.search;
   const onClearFilters = () => {
     setFilters({
-      search: '',
-      page: DEFAULT_PAGE
-    })
-  }
-
+      search: "",
+      page: DEFAULT_PAGE,
+    });
+  };
 
   return (
     <>
-      <CreateAgentDialog open={isDialogOpen} onOpenChange={() => setIsDialogOpen((open) => !open)} />
+      <CreateAgentDialog
+        open={isDialogOpen}
+        onOpenChange={() => setIsDialogOpen((open) => !open)}
+      />
       <div className="py-4 px-4 md:px-8 flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <h5 className="font-medium text-xl">Available Agents</h5>
-          <Button onClick={() => setIsDialogOpen((open) => !open)}><PlusIcon /> Create Agent</Button>
+          <Button onClick={() => setIsDialogOpen((open) => !open)}>
+            <PlusIcon /> Create Agent
+          </Button>
         </div>
         <div className="flex items-center gap-x-2 p-1">
           <AgentsSearchFilter />

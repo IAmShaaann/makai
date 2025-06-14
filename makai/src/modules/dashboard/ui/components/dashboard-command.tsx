@@ -20,7 +20,6 @@ export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
       <CommandList>
         <CommandItem>Naruto Uzumaki</CommandItem>
         <CommandItem>Kakashi Hatake</CommandItem>
-
       </CommandList>
     </CommandResponsiveDialog>
   );
