@@ -1,7 +1,7 @@
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import { MeetingsView } from "@/modules/meetings/ui/views/meetings-view";
-import { MeetingsListHeader } from "@/modules/meetings/ui/views/components/meetings-list-header";
+import { MeetingsListHeader } from "@/modules/meetings/ui/components/meetings-list-header";
 
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
