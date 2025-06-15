@@ -27,6 +27,7 @@ import { CommandSelect } from "@/components/command-select";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { useState } from "react";
 import { CreateAgentDialog } from "@/modules/agents/ui/components/create-agent-dialog";
+import { AgentsGetMany } from "@/modules/agents/types";
 
 interface MeetingFormProps {
   onSuccess?: (id?: string) => void;
@@ -45,7 +46,7 @@ export const MeetingForm = ({
   const [openCreateAgentDialog, setOpenCreateAgentDialog] =
     useState<boolean>(false);
 
-  const agents = useQuery(
+  const { data } = useQuery(
     trpc.agents.getMany.queryOptions({
       pageSize: MAX_PAGE_SIZE,
       search: agentSearch,
@@ -138,20 +139,22 @@ export const MeetingForm = ({
                 <FormLabel>Agent</FormLabel>
                 <FormControl>
                   <CommandSelect
-                    options={(agents.data?.items ?? []).map((agent) => ({
-                      label: agent.name,
-                      value: agent.id,
-                      children: (
-                        <div className="flex  items-center gap-x-2">
-                          <GeneratedAvatar
-                            seed={agent.name}
-                            variant="botttsNeutral"
-                            className="border size-6"
-                          />
-                          <span className="text-sm">{agent.name}</span>
-                        </div>
-                      ),
-                    }))}
+                    options={(data?.items ?? []).map(
+                      (agent: AgentsGetMany[number]) => ({
+                        label: agent.name,
+                        value: agent.id,
+                        children: (
+                          <div className="flex  items-center gap-x-2">
+                            <GeneratedAvatar
+                              seed={agent.name}
+                              variant="botttsNeutral"
+                              className="border size-6"
+                            />
+                            <span className="text-sm">{agent.name}</span>
+                          </div>
+                        ),
+                      }),
+                    )}
                     value={field.value}
                     onSelect={(value) => form.setValue("agentId", value)}
                     onSearch={setAgentSearch}
