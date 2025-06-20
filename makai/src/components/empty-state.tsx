@@ -9,7 +9,7 @@ interface AlertStateProps {
 export const EmptyState = ({
   title,
   description,
-  image = "/empty-svg",
+  image = "/empty.svg",
 }: AlertStateProps) => {
   return (
     <div className="flex flex-col items-center justify-center">
