@@ -1,8 +1,7 @@
-"use client";
-import { format } from "date-fns";
-import humanizeDuration from "humanize-duration";
-import { ColumnDef } from "@tanstack/react-table";
-import { GeneratedAvatar } from "@/components/generated-avatar";
+'use client';
+import { format } from 'date-fns';
+import { ColumnDef } from '@tanstack/react-table';
+import { GeneratedAvatar } from '@/components/generated-avatar';
 import {
   CircleCheckIcon,
   CircleXIcon,
@@ -10,18 +9,10 @@ import {
   ClockFadingIcon,
   CornerDownRightIcon,
   LoaderIcon,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { MeetingsGetMany, MeetingsGetOne } from "@/modules/meetings/types";
-import { cn } from "@/lib/utils";
-
-function formatDuration(seconds: number) {
-  return humanizeDuration(seconds * 1000, {
-    largest: 1,
-    round: true,
-    units: ["h", "m", "s"],
-  });
-}
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { MeetingsGetMany } from '@/modules/meetings/types';
+import { cn, formatDuration } from '@/lib/utils';
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
@@ -32,37 +23,37 @@ const statusIconMap = {
 };
 
 const statusColorMap = {
-  upcoming: "bg-yellow-500/20 type-yellow-800 border-yellow-800/5",
-  active: "bg-blue-500/20 type-blue-800 border-blue-800/5",
-  completed: "bg-emerald-500/20 type-emerald-800 border-emerald-800/5",
-  processing: "bg-rose-500/20 type-rose-800 border-rose-800/5",
-  cancelled: "bg-gray-300/20 type-gray-800 border-gray-800/5",
+  upcoming: 'bg-yellow-500/20 type-yellow-800 border-yellow-800/5',
+  active: 'bg-blue-500/20 type-blue-800 border-blue-800/5',
+  completed: 'bg-emerald-500/20 type-emerald-800 border-emerald-800/5',
+  processing: 'bg-rose-500/20 type-rose-800 border-rose-800/5',
+  cancelled: 'bg-gray-300/20 type-gray-800 border-gray-800/5',
 };
 
 export const columns: ColumnDef<MeetingsGetMany[number]>[] = [
   {
-    accessorKey: "name",
-    header: "Meeting Name",
+    accessorKey: 'name',
+    header: 'Meeting Name',
     cell: ({ row }) => {
       return (
-        <div className="flex flex-col gap-y-1">
-          <span className="font-semibold capitalize">{row.original.name}</span>
-          <div className="flex items-center gap-x-2">
-            <div className="flex items-center gap-x-1">
-              <CornerDownRightIcon className="size-3 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground max-w-[200px] truncate capitalize">
+        <div className='flex flex-col gap-y-1'>
+          <span className='font-semibold capitalize'>{row.original.name}</span>
+          <div className='flex items-center gap-x-2'>
+            <div className='flex items-center gap-x-1'>
+              <CornerDownRightIcon className='size-3 text-muted-foreground' />
+              <span className='text-sm text-muted-foreground max-w-[200px] truncate capitalize'>
                 {row.original.agent.name}
               </span>
             </div>
             <GeneratedAvatar
               seed={row.original.agent.name}
-              variant="botttsNeutral"
-              className="size-4"
+              variant='botttsNeutral'
+              className='size-4'
             />
             <span>
               {row.original.startedAt
-                ? format(row.original.startedAt, "MMM d")
-                : ""}
+                ? format(row.original.startedAt, 'MMM d')
+                : ''}
             </span>
           </div>
         </div>
@@ -70,21 +61,21 @@ export const columns: ColumnDef<MeetingsGetMany[number]>[] = [
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'status',
+    header: 'Status',
     cell: ({ row }) => {
       const Icon =
         statusIconMap[row.original.status as keyof typeof statusIconMap];
       return (
         <Badge
           className={cn(
-            "capitalize [&>svg]:size-4 text-muted-foreground",
-            statusColorMap[row.original.status as keyof typeof statusColorMap],
+            'capitalize [&>svg]:size-4 text-muted-foreground',
+            statusColorMap[row.original.status as keyof typeof statusColorMap]
           )}
         >
           <Icon
             className={cn(
-              row.original.status === "processing" ? "animate-spin" : "",
+              row.original.status === 'processing' ? 'animate-spin' : ''
             )}
           />
           {row.original.status}
@@ -93,18 +84,18 @@ export const columns: ColumnDef<MeetingsGetMany[number]>[] = [
     },
   },
   {
-    accessorKey: "duration",
-    header: "Duration",
+    accessorKey: 'duration',
+    header: 'Duration',
     cell: ({ row }) => {
       return (
         <Badge
-          variant={"outline"}
-          className="capitalize [&>svg]:size-4 flex items-center gap-x-2"
+          variant={'outline'}
+          className='capitalize [&>svg]:size-4 flex items-center gap-x-2'
         >
-          <ClockFadingIcon className="text-blue-700" />
+          <ClockFadingIcon className='text-blue-700' />
           {row.original.duration
             ? formatDuration(row.original.duration)
-            : "Duration not available"}
+            : 'Duration not available'}
         </Badge>
       );
     },
